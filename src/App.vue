@@ -1,7 +1,8 @@
 <template>
   <div id="echarts" :style="{ width: chartWidth + 'px', height: chartHeight + 'px' }">
-    <button @click="handelAjax">读取图表数据</button>
-    <input v-model="chartWidth">x<input v-model="chartHeight">
+    <button @click="handelAjax">读取图表数据</button><br>
+    宽:<input v-model="chartWidth"><br>
+    高:<input v-model="chartHeight"><br>
     <IEcharts v-if="option !== null" :option="option" @ready="handelReady"></IEcharts>
   </div>
 </template>
@@ -62,7 +63,6 @@
 
     handelReady(instance:ECharts) {
       this.instance = instance
-      debugger
     }
 
     mounted () {
