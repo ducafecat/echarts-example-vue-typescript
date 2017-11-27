@@ -1,9 +1,9 @@
 <template>
-  <div id="echarts" :style="{ width: chartWidth + 'px', height: chartHeight + 'px' }">
+  <div id="echartsDiv" :style="{ width: chartWidth + 'px', height: chartHeight + 'px' }">
     <button @click="handelAjax">读取图表数据</button><br>
     宽:<input v-model="chartWidth"><br>
     高:<input v-model="chartHeight"><br>
-    <IEcharts v-if="option !== null" :option="option" @ready="handelReady"></IEcharts>
+    <IEcharts v-if="option !== null" :option="option" @ready="handelReady" :resizable="resizable"></IEcharts>
   </div>
 </template>
 
@@ -14,6 +14,7 @@
   import IEcharts from 'vue-echarts-v3/src/full.js'
   import {ECharts, EChartOption} from 'echarts'
   import { IDataValue } from './interface/IDataValue'
+  import $ from 'jquery'
 
   @Component({
       components: {
@@ -25,6 +26,7 @@
     chartWidth:number = 400
     chartHeight:number = 400
     instance: ECharts
+    resizable: boolean = true
 
     ajaxData() {
       let that = this
@@ -66,6 +68,11 @@
     }
 
     mounted () {
+      $(window).resize(() => {
+        let width = $(window).width()
+        let height = $(window).height()
+        console.log(`window.width: ${width}, window.height: ${height}`)
+      })
     }
   }
 </script>
