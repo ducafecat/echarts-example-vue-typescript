@@ -1,7 +1,8 @@
 <template>
-  <div class="echarts">
+  <div id="echarts" :style="{ width: chartWidth + 'px', height: chartHeight + 'px' }">
     <button @click="handelAjax">读取图表数据</button>
-    <IEcharts v-if="option !== null" :option="option"></IEcharts>
+    <input v-model="chartWidth">x<input v-model="chartHeight">
+    <IEcharts v-if="option !== null" :option="option" @ready="handelReady"></IEcharts>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
   import Vue from 'vue'
   import Component from 'vue-class-component'
   import IEcharts from 'vue-echarts-v3/src/full.js'
+  import {ECharts, EChartOption} from 'echarts'
   import { IDataValue } from './interface/IDataValue'
 
   @Component({
@@ -19,6 +21,9 @@
   })
   export default class App extends Vue {
     option: any = null
+    chartWidth:number = 400
+    chartHeight:number = 400
+    instance: ECharts
 
     ajaxData() {
       let that = this
@@ -54,15 +59,16 @@
     handelAjax() {
       this.ajaxData()
     }
-    
+
+    handelReady(instance:ECharts) {
+      this.instance = instance
+      debugger
+    }
+
     mounted () {
     }
   }
 </script>
 
 <style scoped>
-  .echarts {
-    width: 400px;
-    height: 400px;
-  }
 </style>
