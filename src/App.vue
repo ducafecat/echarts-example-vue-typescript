@@ -3,7 +3,8 @@
     <button @click="handelAjax">读取图表数据</button><br>
     宽:<input v-model="chartWidth"><br>
     高:<input v-model="chartHeight"><br>
-    <div>{{msg}}</div><br>
+    <div>{{msg1}}</div><br>
+    <div>{{msg2}}</div><br>
     <IEcharts v-if="option !== null" :option="option" @ready="handelReady" :resizable="resizable"></IEcharts>
   </div>
 </template>
@@ -30,7 +31,8 @@ export default class App extends Vue {
   chartHeight: number = 400
   instance: ECharts
   resizable: boolean = true
-  msg: string = ''
+  msg1: string = ''
+  msg2: string = ''
 
   ajaxData () {
     let that = this
@@ -73,10 +75,11 @@ export default class App extends Vue {
   }
 
   mounted () {
+    this.msg2 = this.$textInfo
     $(window).resize(() => {
       let width = $(window).width()
       let height = $(window).height()
-      this.msg = `window.width: ${width}, window.height: ${height}`
+      this.msg1 = `window.width: ${width}, window.height: ${height}`
     })
   }
 }
