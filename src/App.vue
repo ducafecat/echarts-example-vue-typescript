@@ -16,11 +16,13 @@ import IEcharts from 'vue-echarts-v3/src/full.js'
 import { ECharts } from 'echarts'
 import { IDataValue } from './interface/IDataValue'
 import $ from 'jquery'
+import PageMixin from './mixin/pageMixin'
 
 @Component({
   components: {
     IEcharts
-  }
+  },
+  mixins: [PageMixin]
 })
 export default class App extends Vue {
   option: any = null
